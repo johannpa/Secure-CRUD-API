@@ -14,9 +14,12 @@ import { ResetPasswordDemandDto } from './dto/resetPasswordDemandDto';
 import { SigninDto } from './dto/signinDto';
 import { SignupDto } from './dto/signupDto';
 import { ResetPasswordConfirmationDto } from './dto/resetPasswordConfirmationDto';
+import { DeleteAccountDto } from './dto/deleteAccountDto';
 
 @Injectable()
 export class AuthService {
+    // ** Envoyer un email de confirmation
+        
     
     constructor(private readonly prismaService: PrismaService,
                 private readonly mailerService: MailerService,
@@ -96,4 +99,14 @@ export class AuthService {
         return {data: "Password updated"}
     }
     
+    async deleteAccount (userId: any, deleteAccountDto: DeleteAccountDto) {
+        const { password } = deleteAccountDto
+        const user = await this.prismaService.user.findUnique({ where: { userId} });
+        if(!user) throw new NotFoundException('User not found');
+        // ** Comparer le mot de passe
+        const match = await bcrypt.compare(password, user.password);
+        if(!match) throw new UnauthorizedException("Password does not match");
+        await this.prismaService.user.delete({where : { userId} });
+        return { data : "User successfully deleted"};
+    }
 }
