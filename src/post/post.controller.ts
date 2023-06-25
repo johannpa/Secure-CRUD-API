@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req} from '@nestjs/common';
+import { Body, Controller, Get, Post, Req} from '@nestjs/common';
 import { UseGuards } from '@nestjs/common/decorators/core/use-guards.decorator';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
@@ -8,6 +8,11 @@ import { PostService } from './post.service';
 @Controller('posts')
 export class PostController {
     constructor(private readonly postService: PostService) {}
+
+    @Get()
+    getAll() {
+        return this.postService.getAll();
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Post('create')
