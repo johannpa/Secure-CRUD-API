@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignupDto } from './dto/signupDto';
 import { SigninDto } from './dto/signinDto';
@@ -26,5 +26,10 @@ export class AuthController {
     @Post("reset-password-confirmation")
     resetPasswordConfirmation(@Body() resetPasswordConfirmationDto: ResetPasswordConfirmationDto) {
         return this.authService.resetPasswordConfirmation(resetPasswordConfirmationDto)
+    }
+
+    @Delete("delete")
+    deleteAccount() {
+        return "account deleted";
     }
 }
