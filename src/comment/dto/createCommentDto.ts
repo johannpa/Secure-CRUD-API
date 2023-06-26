@@ -1,6 +1,9 @@
 import { IsNotEmpty } from "class-validator";
 
-export class CommnentDto {
+export class CreateCommentDto {
     @IsNotEmpty()
     readonly content: string
+
+    @IsNotEmpty()
+    readonly postId : number
 }
