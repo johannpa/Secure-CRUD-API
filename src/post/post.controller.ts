@@ -5,9 +5,7 @@ import { Request } from 'express';
 import { CreatePostDto } from './dto/createPostDto';
 import { PostService } from './post.service';
 import { UpdatePosteDto } from './dto/updatePostDto';
-import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags("Post")
 @Controller('posts')
 export class PostController {
     constructor(private readonly postService: PostService) { }
