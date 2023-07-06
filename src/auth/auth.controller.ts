@@ -8,9 +8,7 @@ import { SigninDto } from './dto/signinDto';
 import { SignupDto } from './dto/signupDto';
 import { Request } from 'express';
 import { DeleteAccountDto } from './dto/deleteAccountDto';
-import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags("Authentication")
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService : AuthService) {}

@@ -4,9 +4,7 @@ import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/createCommentDto';
 import { AuthGuard } from '@nestjs/passport';
 import { UpdateCommentDto } from './dto/updateCommentDto';
-import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags("Comments")
 @Controller('comments')
 export class CommentController {
     constructor(private readonly commentService: CommentService) { }
